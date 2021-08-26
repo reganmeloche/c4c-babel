@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>esdc_rules_classes</RootNamespace>
+    <PackageId>BabelRulesEngineSample</PackageId>
+    <Version>1.1.0</Version>
+    <Authors>regan_meloche</Authors>
+    <Company>esdc_c4c</Company>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+  </ItemGroup>
+
+</Project>

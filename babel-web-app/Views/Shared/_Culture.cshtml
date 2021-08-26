@@ -1,0 +1,24 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@inject Microsoft.Extensions.Options.IOptions<Microsoft.AspNetCore.Builder.RequestLocalizationOptions> locOptions
+
+@{
+    var culture = Context.Features.Get<Microsoft.AspNetCore.Localization.IRequestCultureFeature>();
+    var cultureCode = culture.RequestCulture.Culture;
+    var returnUrl = String.IsNullOrWhiteSpace(Context.Request.Path) ? 
+        "~/" :
+        $"~{Context.Request.Path.Value}{Context.Request.QueryString}";
+
+    var switchCulture = "fr";
+    var switchLang = "Français";
+
+    if (cultureCode.TwoLetterISOLanguageName == "fr") {
+        switchCulture = "en";
+        switchLang = "English";
+    }
+}
+
+<div>
+    <a asp-controller="Home" asp-action="CultureManagement" asp-route-returnUrl="@returnUrl" asp-route-culture="@switchCulture" lang="@switchCulture">
+        @switchLang
+    </a>
+</div>

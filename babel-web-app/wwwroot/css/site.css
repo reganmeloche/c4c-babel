@@ -1,0 +1,63 @@
+﻿.my-nav-link {
+    text-decoration: underline !important;
+    color: #222222 !important;
+}
+
+.my-nav-link:hover {
+    text-decoration: none !important;
+    color:blue !important;
+}
+
+nav.navbar {
+    padding: 0;
+    margin: 0;
+}
+nav.navbar a:link {
+    padding: 10px 20px 0 0;
+    display: inline-block;
+}
+
+/* Alpha site nav*/
+#alpha-banner-text {
+    font-size: 14px;
+}
+
+.superHeader {
+    padding: 20px 0; 
+    background: #093d6b; 
+    color:#fff
+}
+
+.superHeader span {
+    display: block;
+    font-weight: 500;
+    color: #093d6b;
+    background: #fff;
+    padding: 2px 14px;
+    text-align: center;
+    margin: 0 auto 15px auto;
+    max-width: calc(100% - 15px);
+}
+
+.superHeader p { 
+    padding: 0; 
+    margin: 0 0 0 12px; 
+    display: inline-block
+}
+/******/
+
+#results-table_wrapper {
+    width: 100% !important
+}
+
+.result-dl-title {
+    margin-bottom: 25px;
+}
+
+.custom-divider {
+    border-top: 4px solid #eee;
+}
+
+.aggregation-table th {
+    font-size: 1.5rem;
+}

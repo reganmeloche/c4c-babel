@@ -1,0 +1,79 @@
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@using babel_web_app.Models;
+@model SimulationFormViewModel
+
+<div>
+    <h2>@localizer["form_title"]</h2>
+    <p>@localizer["form_info"]</p>
+    <br/>
+    <div class="row">
+        <div class="col-md-8">
+            <form asp-action="Index" class="form-horizontal" id="mat-ben-form">
+                <input type="hidden" asp-for="SimulationName"/>
+                <input type="hidden" asp-for="BaseCase.MaxWeeklyAmount"/>
+                <input type="hidden" asp-for="BaseCase.Percentage"/>
+                <input type="hidden" asp-for="BaseCase.NumWeeks"/>
+
+                <!-- Max weekly amount -->
+                <div class="form-group">
+                    <label asp-for="VariantCase.MaxWeeklyAmount" id="label-max-weekly-amount" class="col-sm-6 control-label" data-toggle="tooltip" data-placement="right" title=@localizer["max_weekly_amount_description"]>
+                        @localizer["max_weekly_amount_label"]
+                    </label>
+                    <div class="col-sm-6">
+                        <input id="form-max-weekly-amount" aria-labelledby="label-max-weekly-amount" type="number" class="form-control" asp-for="VariantCase.MaxWeeklyAmount"/>
+                        <span class="text-danger" aria-role="alert" asp-validation-for="VariantCase.MaxWeeklyAmount"></span>
+                    </div>
+                </div>
+
+                <!-- Percentage -->
+                <div class="form-group">
+                    <label asp-for="VariantCase.Percentage" id="label-percentage" class="col-sm-6 control-label" data-toggle="tooltip" data-placement="right" title=@localizer["percentage_description"]>
+                        @localizer["percentage_label"]
+                    </label>
+                    <div class="col-sm-6">
+                        <input id="form-percentage" aria-labelledby="label-percentage" type="number" class="form-control" asp-for="VariantCase.Percentage"/>
+                        <span class="text-danger" aria-role="alert" asp-validation-for="VariantCase.Percentage"></span>
+                    </div>
+                </div>
+
+                <!-- Num weeks -->
+                <div class="form-group">
+                    <label asp-for="VariantCase.NumWeeks" id="label-num-weeks" class="col-sm-6 control-label" data-toggle="tooltip" data-placement="right" title=@localizer["num_weeks_description"]>
+                        @localizer["num_weeks_label"]
+                    </label>
+                    <div class="col-sm-6">
+                        <input id="form-num-weeks" aria-labelledby="label-num-weeks" type="number" class="form-control" asp-for="VariantCase.NumWeeks"/>
+                        <span class="text-danger" aria-role="alert" asp-validation-for="VariantCase.NumWeeks"></span>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="form-group">
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-6">
+                        <div class="btn-group">
+                            <button type="button" onclick="resetFields();" class="btn btn-sm btn-default">@localizer["reset_fields_button"]</a>
+                            <button type="submit" class="btn btn-sm btn-success">@localizer["run_simulation_text"]</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+</div>
+
+<script>
+    function resetFields() {
+        var form = $("#mat-ben-form");
+
+        var defaultMax = 595;
+        var defaultPercentage = 55;
+        var defaultNumWeeks = 15;
+
+        $(form).find("#form-max-weekly-amount").val(defaultMax);
+        $(form).find("#form-percentage").val(defaultPercentage);
+        $(form).find("#form-num-weeks").val(defaultNumWeeks);
+    }
+</script>
+

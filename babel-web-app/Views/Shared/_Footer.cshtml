@@ -1,0 +1,39 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
+<div class="landscape">
+    <nav class="container wb-navcurr">
+        <h2 class="wb-inv">@localizer["about_government"]</h2>
+        <ul class="list-unstyled colcount-sm-2 colcount-md-3">
+            <li><a href=@localizer["contact_us_link"]>@localizer["contact_us"]</a></li>
+            <li><a href=@localizer["departments_and_agencies_link"]>@localizer["departments_and_agencies"]</a></li>
+            <li><a href=@localizer["public_service_link"]>@localizer["public_service"]</a></li>
+            <li><a href=@localizer["news_link"]>@localizer["news"]</a></li>
+            <li><a href=@localizer["treaties_link"]>@localizer["treaties"]</a></li>
+            <li><a href=@localizer["reporting_link"]>@localizer["reporting"]</a></li>
+            <li><a href=@localizer["prime_minister_link"]>@localizer["prime_minister"]</a></li>
+            <li><a href=@localizer["how_government_works_link"]>@localizer["how_government_works"]</a></li>
+            <li><a href=@localizer["open_government_link"]>@localizer["open_government"]</a></li>
+        </ul>
+    </nav>
+</div>
+<div class="brand">
+    <div class="container">
+        <div class="row">
+            <nav class="col-md-9 col-lg-10 ftr-urlt-lnk">
+                <h2 class="wb-inv">About this site</h2>
+                <ul>
+                    <li><a href=@localizer["social_media_link"]>@localizer["social_media"]</a></li>
+                    <li><a href=@localizer["mobile_apps_link"]>@localizer["mobile_apps"]</a></li>
+                    <li><a href=@localizer["terms_and_conditions_link"]>@localizer["terms_and_conditions"]</a></li>
+                    <li><a href=@localizer["privacy_link"]>@localizer["privacy"]</a></li>
+                </ul>
+            </nav>
+            <div class="col-xs-6 visible-sm visible-xs tofpg">
+                <a href="#wb-cont">@localizer["top_of_page"] <span class="glyphicon glyphicon-chevron-up"></span></a>
+            </div>
+            <div class="col-xs-6 col-md-3 col-lg-2 text-right">
+                <img src="~/GCWeb/assets/wmms-blk.svg" alt="Symbol of the Government of Canada">
+            </div>
+        </div>
+    </div>
+</div>

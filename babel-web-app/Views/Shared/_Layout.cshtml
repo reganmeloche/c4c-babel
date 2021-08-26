@@ -1,0 +1,65 @@
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@{
+    var culture = Context.Features.Get<Microsoft.AspNetCore.Localization.IRequestCultureFeature>();
+    var cultureCode = culture.RequestCulture.Culture;
+}
+
+<!DOCTYPE html>
+<html class="no-js" lang="@cultureCode" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <!-- Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW)
+		wet-boew.github.io/wet-boew/License-en.html / wet-boew.github.io/wet-boew/Licence-fr.html -->
+    <title>@(localizer["title"]) - @ViewBag.PageTitle</title>
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <meta name="description" content=@localizer["content"]>
+    @* <link rel="alternate" hreflang="fr" href="content-fr.html"> *@
+    <link href="~/GCWeb/assets/favicon.ico" rel="icon" type="image/x-icon">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/GCWeb/css/theme.min.css">
+    <link rel="stylesheet" href="~/css/site.css">
+    <noscript><link rel="stylesheet" href="~/wet-boew/css/noscript.min.css" /></noscript>
+</head>
+<body vocab="http://schema.org/" resource="#wb-webpage" typeof="WebPage">
+    <nav>
+        <ul id="wb-tphp">
+            <li class="wb-slc">
+                <a class="wb-sl" href="#wb-cont">@localizer["skip_to_main"]</a>
+            </li>
+        </ul>
+    </nav>
+
+    <header>
+        <partial name="_Header">
+    </header>
+
+    <main property="mainContentOfPage" resource="#wb-main" class="container" typeof="WebPageElement">
+        <div>
+            <!-- TODO: What do we think of this? -->
+            <h1 id="wb-cont" property="name">@localizer["title"] - @ViewBag.PageTitle</h1>
+            <p>@localizer["info"]</p>
+            <details>
+                <summary>
+                    @localizer["more"]
+                </summary>
+                <p>@localizer["info2"]</p>
+            </details>
+            
+        </div>
+        <hr/>
+        @RenderBody()
+    </main>
+
+    <footer id="wb-info">
+        <partial name="_Footer">
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/wet-boew/js/wet-boew.min.js"></script>
+    <script src="~/GCWeb/js/theme.min.js"></script>
+    @* <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script> *@
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

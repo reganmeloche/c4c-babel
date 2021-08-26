@@ -1,0 +1,154 @@
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@using System.Globalization;
+@model ResultsViewModel
+
+@{
+    var resultsSummary = Model.Results;
+    var baseCase = resultsSummary.Simulation.BaseCase;
+    var variantCase = resultsSummary.Simulation.VariantCase;
+    var summary = resultsSummary.OverallSummary;
+    var aggregations = resultsSummary.Aggregations;
+
+    // Culture name
+    var cn = CultureInfo.GetCultureInfo("en-CA");
+}
+<div>
+    <h2>@localizer["simulation_results_title"]</h2>
+    <p>@localizer["simulation_results_info"]</p>
+</div>
+
+<!-- Base and Variant Case -->
+<div>
+    <div class="result-dl-title">
+        <h3>@localizer["your_changes_title"]</h3>
+    </div>
+    <table class="table">
+        <thead>
+            <th scope="col">@localizer["parameter_header"]</th>
+            <th scope="col" class="text-center">@localizer["original_value_header"]</th>
+            <th scope="col" class="text-center">@localizer["proposed_change_header"]</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td><b>@localizer["max_weekly_amount_label"]</b></td>
+                <td class="text-center">@String.Format(cn, "{0:C2}", baseCase.MaxWeeklyAmount)</td>
+                <td class="text-center">@String.Format(cn, "{0:C2}", variantCase.MaxWeeklyAmount)</td>
+            </tr>
+            <tr>
+                <td><b>@localizer["percentage_label"]</b></td>
+                <td class="text-center">@String.Format("{0:N0}%", baseCase.Percentage)</td>
+                <td class="text-center">@String.Format("{0:N0}%", variantCase.Percentage)</td>
+            </tr>
+            <tr>
+                <td><b>@localizer["num_weeks_label"]</b></td>
+                <td class="text-center">@baseCase.NumWeeks</td>
+                <td class="text-center">@variantCase.NumWeeks</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<hr class="custom-divider"/>
+
+
+<!-- Overall results -->
+<div>
+    <div class="result-dl-title">
+        <h3>@localizer["overall_results_title"]</h3>
+    </div>
+    <hr/>
+    <div>
+        <dl class="row">
+            <dt class="col-sm-6">@localizer["sample_size_label"]</dt>
+            <dd class="col-sm-6">@summary.SampleSize</dd>
+            <dt class="col-sm-6">@localizer["percent_cost_change_label"]</dt>
+            <dd class="col-sm-6">@String.Format("{0:n1}%", summary.PercentChangeInCost)</dd>
+            <dt class="col-sm-6">@localizer["avg_change_label"]</dt>
+            <dd class="col-sm-6">@String.Format(cn, "{0:C2}", summary.AverageAmountChange)</dd>
+            <dt class="col-sm-6">@localizer["avg_percent_change_label"]</dt>
+            <dd class="col-sm-6">@String.Format("{0:n1}%", summary.AveragePercentChange)</dd>
+        </dl>
+    </div>
+</div>
+<hr class="custom-divider"/>
+
+<!-- Gained -->
+<div>
+    <div class="result-dl-title">
+        <h3>@localizer["gainers_title"]</h3>
+    </div>
+    <hr/>
+    <div>
+        <dl class="row">
+            <dt class="col-sm-6">@localizer["percent_gainers_label"]</dt>
+            <dd class="col-sm-6">@String.Format("{0:n1}%", summary.PercentThatGained)</dd>
+            <dt class="col-sm-6">@localizer["avg_gain_label"]</dt>
+            <dd class="col-sm-6">@String.Format(cn, "{0:C2}", summary.AverageAmountGained)</dd>
+            <dt class="col-sm-6">@localizer["avg_percent_gain_label"]</dt>
+            <dd class="col-sm-6">@String.Format("{0:n1}%", summary.AveragePercentGained)</dd>
+        </dl>
+    </div>
+</div>
+<hr class="custom-divider"/>
+
+<!-- Lost -->
+<div>
+    <div class="result-dl-title">
+        <h3>
+            @localizer["losers_title"]
+        </h3>
+    </div>
+    <hr/>
+    <div>
+        <dl class="row">
+            <dt class="col-sm-6">@localizer["percent_losers_label"]</dt>
+            <dd class="col-sm-6">@String.Format("{0:n1}%", summary.PercentThatLost)</dd>
+            <dt class="col-sm-6">@localizer["avg_loss_label"]</dt>
+            <dd class="col-sm-6">@String.Format(cn, "{0:C2}", summary.AverageAmountLost)</dd>
+            <dt class="col-sm-6">@localizer["avg_percent_loss_label"]</dt>
+            <dd class="col-sm-6">@String.Format("{0:n1}%", summary.AveragePercentLost)</dd>
+        </dl>
+    </div>
+</div>
+<hr class="custom-divider"/>
+
+@foreach (var aggSet in aggregations) {
+    var agg = aggSet.Value;
+
+<div>
+    <div class="result-dl-title">
+        <h3>
+            @localizer["agg_aggregation_by_title"] @localizer[aggSet.Key]
+        </h3>
+    </div>
+    <table class="wb-tables table table-striped table-hover aggregation-table" data-wb-tables='{ "searching" : false, "paging": false, "lengthChange": false, "info": false }'>
+        <thead>
+            <tr>
+                <th>@localizer[aggSet.Key]</th>
+                <th scope="col" class="text-right">@localizer["agg_sample_size_header"]</th>
+                <th scope="col" class="text-right">@localizer["agg_sample_percent_header"]</th>
+                <th scope="col" class="text-right">@localizer["agg_avg_change_header"]</th>
+                <th scope="col" class="text-right">@localizer["agg_avg_percent_change_header"]</th>
+                <th scope="col" class="text-right">@localizer["agg_percent_gained_header"]</th>
+                <th scope="col" class="text-right">@localizer["agg_percent_lost_header"]</th>
+                <th scope="col" class="text-right">@localizer["agg_percent_unchanged_header"]</th> 
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var x in agg.GroupKeys) {
+                <tr>
+                    <td>@localizer[x]</td>
+                    <td class="text-right">@agg.TotalCountsDict[x]</td>
+                    <td class="text-right">@String.Format("{0:n0}%", agg.TotalPercentsDict[x])</td>
+                    <td class="text-right">@String.Format(cn, "{0:C2}", agg.AverageAmountChangeDict[x])</td>
+                    <td class="text-right">@String.Format("{0:n1}%", agg.AveragePercentChangeDict[x])</td>
+                    <td class="text-right">@String.Format("{0:n1}%", agg.PercentThatGainedDict[x])</td>
+                    <td class="text-right">@String.Format("{0:n1}%", agg.PercentThatLostDict[x])</td>
+                    <td class="text-right">@String.Format("{0:n1}%", agg.PercentUnchangedDict[x])</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<hr/>
+}
+<br/><br/>

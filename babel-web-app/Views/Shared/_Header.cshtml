@@ -1,0 +1,66 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@inject Microsoft.Extensions.Options.IOptions<Microsoft.AspNetCore.Builder.RequestLocalizationOptions> locOptions
+
+@{
+    var culture = Context.Features.Get<Microsoft.AspNetCore.Localization.IRequestCultureFeature>();
+    var cultureCode = culture.RequestCulture.Culture;
+}
+
+<!-- Service Labs Header -->
+<div class="superHeader">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-2">
+                <span class="TestSite">@localizer["test_site"]</span>
+            </div>
+            <div class="col-xs-12 col-md-10">
+                <p id="alpha-banner-text">@localizer["test_site_info"]</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="wb-bnr" class="container">
+    <div class="row">
+        <section id="wb-lng" class="col-xs-3 col-sm-12 pull-right text-right">
+            <h2 class="wb-inv">@localizer["language_selection"]</h2>
+            <ul class="list-inline mrgn-bttm-0">
+                <li>
+                    <partial name="_Culture"/>
+                </li>
+            </ul>
+        </section>
+        <div class="brand col-xs-9 col-sm-5 col-md-4" property="publisher" resource="#wb-publisher" typeof="GovernmentOrganization">
+            <a href="https://www.canada.ca/home.html" property="url">
+                <img src="~/GCWeb/assets/sig-blk-@(cultureCode).svg" alt="Government of Canada" property="logo">
+                <span class="wb-inv"> / <span lang="fr">Gouvernement du Canada</span></span>
+            </a>
+            <meta property="name" content="Government of Canada">
+            <meta property="areaServed" typeof="Country" content="Canada">
+            <link property="logo" href="~/GCWeb/assets/wmms-blk.svg">
+        </div>
+    </div>
+</div>
+
+
+<nav aria-label="Main" role="primary" class="navbar navbar-default">
+    <div class="container">
+       <div class="row">
+           <div class="col-md-12">
+                <a class="my-nav-link" asp-controller="Home" asp-action="Index">@localizer["home"]</a>
+                <a class="my-nav-link" asp-controller="MaternityBenefits" asp-action="Index">@localizer["new_simulation"]</a>
+           </div>
+        </div>
+    </div>    
+</nav>
+
+<nav id="wb-bc" aria-label="Breadcrumb" property="breadcrumb">
+    <h2>@localizer["you_are_here"]</h2>
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href=@localizer["canada_ca_link"]>@localizer["canada_ca"]</a></li>
+            <li><a href=@localizer["sc_labs_link"]>@localizer["sc_labs"]</a></li>
+        </ol>
+    </div>
+</nav>
+
